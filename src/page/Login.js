@@ -26,9 +26,10 @@ const Container = styled.div`
   }
 
   .item2 {
-    margin: 10px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
+    width: 500px;
   }
 
   .item3 {
@@ -179,7 +180,7 @@ const Login = () => {
       console.log(res.data);
       if(res.data === true) {
        window.localStorage.setItem("userId",inputId);
-        navigate('/home');  
+        navigate('/');  
       } else {
         setModalOpen(true);
       }
@@ -210,6 +211,7 @@ const Login = () => {
           <button className="enable-button" onClick={onClickLogin}>SING IN</button>  :
           <button className="disable-button" onClick={onClickLogin}>SING IN</button>}
         </div>
+        <button>아이디찾기</button>
         <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
    </Container>
     );

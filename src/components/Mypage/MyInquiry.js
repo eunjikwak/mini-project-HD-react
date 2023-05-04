@@ -5,7 +5,7 @@ const MyInquiry = () => {
 
     return(
         <>
-        <h4>1:1문의내역</h4>
+        <div className="titleName">1:1문의내역</div>
         <InquiryBoard/>
         </>
     );

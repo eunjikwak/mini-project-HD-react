@@ -49,7 +49,33 @@ const AxiosApi = {
             vo : data
         }
         return await axios.post(HD_DOMAIN+"/update",member);
+    },
+
+    //문의 조회
+    inquiryGet : async(id) => {
+        return await axios.get(HD_DOMAIN + `/inquiry?name=${id}`);
+    },
+    //리뷰 조회
+    reviewGet : async(id) => {
+        return await axios.get(HD_DOMAIN + `/review?name=${id}`);
+
+    },
+    
+    //예약내역 조회 
+    resvGet : async(id,stat) => {
+        return await axios.get(HD_DOMAIN +  `/resv?name=${id}&stat=${stat}`);
+    },
+
+    //매장이름가져오기 
+    restNameGet : async(id) => {
+        return await axios.get(HD_DOMAIN +  `/restName?name=${id}`);
+    },
+
+    //찜가게 조회 
+    restLikeGet : async(id) => {
+        return await axios.get(HD_DOMAIN + `/restLike?name=${id}` );
     }
+
 
 };
 export default AxiosApi;

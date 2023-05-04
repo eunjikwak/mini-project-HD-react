@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled, {css} from "styled-components";
 import MenuImg from "../../images/pngwing.com-removebg-preview.png";
-
+import { Link } from "react-router-dom";
 const MenuButton = styled.div`
   height  : 100px;
   width : 100px;
@@ -117,8 +117,8 @@ const SideMenu = () => {
                 <Box isOpen={isOpen} >
                    <div className="header">메뉴</div>
                     <div className="box" onClick={onClickBox}>
-                        <div className="item">로그인/회원가입</div>
-                        <div className="item">마이 페이지</div>
+                        <div className="item"><Link to="/Login">로그인</Link></div>
+                        <div className="item"><Link to="/Home/Mypage">마이페이지</Link></div>
                         <div className="item">내 정보/수정</div>
                         <div className="item">찜한 가게</div>
                         <div className="item">1:1 문의 내역</div>

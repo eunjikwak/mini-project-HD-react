@@ -8,40 +8,39 @@ const MyProfileBlock = styled.div`
     width: 70%;
     height: auto;
     margin: 30px auto;
-    background-color: #F5F5F5;
-
+    background-color: #FBF4EF;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
     padding: 20px;
+    
+    //프로필 이미지
     .profileImg img{
         width: 200px;
         height: 200px;
+        
     }
+    //버튼
     button{
-            margin-right: 20px;
-            font-family: 'Noto Sans KR', sans-serif;
+            margin: 20px;
             font-size: 26px;
             font-weight: bold;
-            width: 200px; /* 원하는 너비 설정 */
+            width: 200px; 
             height: 50px;
             color: white;
-            background-color: orange;
+            background-color: #FF7F50;
             font-size: 15px;
-            font-weight: 400;
             border-radius: 18px;
-            border: orange;
-            font-weight: 700;
+            border:none;
+            cursor: pointer;
         }
+
+
     .profileInfo{
         box-sizing: border-box;
-        background-color: wheat;
-        border-radius: 30px;
-        width: 500px;
-        height: 250px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -56,29 +55,28 @@ const MyProfileBlock = styled.div`
                 label{
                     font-size: 20px;
                     width: 80px;
-                    margin : 10px auto;
+                    margin : 10px;
            
                 }
                 input{
                     margin-left: 10px;
                     margin-right: 10px;
-                    width: 250px; /* 원하는 너비 설정 */
-                    height: 20px; /* 높이값 초기화 */
-                    line-height : normal; /* line-height 초기화 */
-                    padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-                    font-family: inherit; /* 폰트 상속 */
+                    width: 250px; 
+                    height: 20px;
+                    padding: .5em .1em; 
+                    font-family: inherit; 
                     border: 1px solid #999;
-                    border-radius: 18px; /* iSO 둥근모서리 제거 */
+                    font-size: 18px;
+                    border-radius: 10px; /* iSO 둥근모서리 제거 */
                 }
                 .result {
                     margin-left: 10px;
                     margin-right: 10px;
-                    width: 250px; /* 원하는 너비 설정 */
-                    height: 20px; /* 높이값 초기화 */
-                    line-height : normal; /* line-height 초기화 */
-                    padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-                    font-family: inherit; /* 폰트 상속 */
-                    background-color: #999;
+                    width: 250px;
+                    height: 20px;
+                    font-size: 18px;
+                    font-family: inherit;
+                   
                 }
             }
     }
@@ -103,7 +101,7 @@ const MyProfile =  () => {
 
         const rsp = await AxiosApi.memberUpdate(memberValue);
         if(rsp.data){
-            console.log("회원정보 업데이트 완료!");
+            console.log("회원정보 업데이트 완료!");//추후 업데이트
             setMemberValue(memberValue);
             //input창 닫기 
             setShowInput(false);
@@ -116,7 +114,7 @@ const MyProfile =  () => {
         const{name,value} = e.target;
         setMemberValue(state => ({...state,[name]:value}));
     }
-    if(!memberValue) return<MyProfileBlock>로그인이 필요합니다.</MyProfileBlock>;
+    if(!memberValue) return<MyProfileBlock>로그인이 필요합니다.</MyProfileBlock>;//추후 업데이트
     return(
         <MyProfileBlock>
         <div className="profileImg"><img src={ProfileImg} alt="Logo" /></div>
@@ -149,7 +147,7 @@ const MyProfile =  () => {
             </div>
             </div> 
         </div>
-        {showInput? <button onClick={onClickUpate}>수정완료</button> :
+        {showInput? <button onClick={onClickUpate} style={{backgroundColor : "#FFA07A"}}>수정완료</button> :
                     <button onClick={()=> setShowInput(true)}>프로필수정</button>}
         </MyProfileBlock>
     );

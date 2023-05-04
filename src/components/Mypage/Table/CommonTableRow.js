@@ -1,12 +1,8 @@
 import React from 'react';
 
-const TableRow = ({ children }) => {
+const TableRow = ({children}) => {
   return (
-    <tr className="common-table-row">
-      {
-        children
-      }
-    </tr>
+    <tr className="common-table-row">{children}</tr>
   )
 }
 

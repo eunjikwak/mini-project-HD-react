@@ -5,18 +5,29 @@ import MyLikeStore from "./MyLikeStore";
 import MyInquiry from "./MyInquiry";
 import styled from "styled-components";
 import MyResv from "./MyResv";
-
+import React from "react";
+import MypageMain from "./MypageMain";
 const SectionBlock = styled.div`
-    background-color: pink;
+    background-color:#FBF4EF;
+    border-radius: 5px;
+    border : 3px solid #F0B7A2;
+    border-style :double;
     width : 700px;
     height: auto;
+    .titleName {
+        color : #FF7F50;
+        font-size: 40px;
+        font-weight: 900;
+        text-align: center;
+        margin: 20px;
+    }
 
 `;
 
-const menuSelect = (name,userId) => {
+const menuSelect = (name) => {
     switch(name){
         case "menu1" : 
-        return <MemberInfo id={userId}/>;
+        return <MemberInfo/>;
        
         case "menu2" : 
         return <MyReview/>;
@@ -30,15 +41,14 @@ const menuSelect = (name,userId) => {
         case "menu5" : 
         return <MyResv/>;
         default:
-           return null;
+           return <MypageMain/>;
     }
 }
 
-const Section= ({category,id}) => {
+const Section= ({category}) => {
     return(
         <SectionBlock>
-        <h1>세션</h1>
-        {menuSelect(category,id)}
+        {menuSelect(category)}
         </SectionBlock>
     );
 }

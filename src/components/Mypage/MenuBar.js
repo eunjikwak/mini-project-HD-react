@@ -28,52 +28,61 @@ const categories = [
     }
 ];
 const MenuBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content : center;
-    align-items: center;
-    background-color: #eee;
+    background-color: #FBF4EF;
     width : 300px;
-    
+    height: auto;
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 10px;
     .title{
-      
         font-size: 25px;
         font-weight: bold;
-        
+        position: relative;
+        top: 10px;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
     hr{
-        border: 2px solid black;
+        border: 1px solid #FF7F50;
         width: 80%;
         margin-bottom: 2rem;
+      
     }
+    //로그아웃 버튼
     .btn{
             font: inherit;
             border :none;
-            margin-top: 300px;
+            //margin-top: 300px;
             padding: 0;
             cursor: pointer;
-            align-items: end;
+            background-color: #FBF4EF;
+            //하단에 고정시키기
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            margin: auto;
      } 
-
+  
 `;
 
 const Category = styled.div`
-    font-size: 20px;
+    //position: relative;
+    //top: 30px;
     cursor: pointer;
-    white-space: pre;
-    text-decoration: none;
-    color: inherit;
     padding-bottom: 2rem;
     text-align: center;
     &:hover {
-        color:#3bc9db;
+        color:#FF7F50;
     }
     ${props => 
         props.active && css`
         font-weight: 600;
-        color: #22b8cf;
+        color: #FF7F50;
         &:hover {
-            color: #3bc9db;
+            color: #FF7F50;
         }
     `}
     & + & {
@@ -88,7 +97,7 @@ const MenuBar = ({onSelect,category}) => {
     const logout = () => {
         localStorage.removeItem("userId");
         setUserId(null);
-        navigate('/home');  
+        navigate('/');  
       };
     return(
         <MenuBlock>
@@ -105,7 +114,7 @@ const MenuBar = ({onSelect,category}) => {
         {userId ? (
             <button className="btn" onClick={logout}>Logout</button>
                 ) : (
-            <button className="btn" onClick={()=> {navigate("/")}}>Login</button>
+            <button className="btn" onClick={()=> {navigate("/Login")}}>Login</button>
          )}
         </MenuBlock>
     );

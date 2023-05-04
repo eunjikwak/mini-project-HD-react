@@ -6,10 +6,18 @@ import MyProfile from "../components/Mypage/MyProfile";
 import Section from "../components/Mypage/Section";
 import styled from "styled-components";
 const MypageBlock = styled.div`
-    background-color:#D9D9D9;
-    h1{
+    //전체폰트
+    font-family: "NanumGothic";
+    //배경색상
+    background-color:#EEE4DC;
+    //페이지제목
+    .pageTitle{
+        margin-top: 30px;
         text-align: center;
+        font-size: 50px;
+        font-weight: 800;
     }
+    //메뉴바와 세션 영역 CSS
     .section {
         display: flex;
         flex-direction: row;
@@ -19,22 +27,18 @@ const MypageBlock = styled.div`
     
 `;
 const Mypage= () => {
-      const userId = window.localStorage.getItem("userId");
       const [category,setCategory] = useState('nomal');
       const onSelect = useCallback(category => setCategory(category),[]);
 	return (
 		<MypageBlock>
            <HomeHeader/>
-           <h1> 마 이 페 이 지 </h1>
-
+           <div className="pageTitle"> MY PAGE </div>
            <MyProfile/>
            <div className="section">
            <MenuBar category={category} onSelect={onSelect}/>
-           <Section category={category} id={userId}/>
+           <Section category={category}/>
            </div>
      
-          
-           
            <HomeFooter/>
         
         </MypageBlock>

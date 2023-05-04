@@ -23,8 +23,6 @@ const Home = () => {
 
     return(
         <>
-        
-            <Link to="/Home/Mypage">마이페이지</Link>
             <Body>
                 <HomeHeader/>
                 <Main/>   

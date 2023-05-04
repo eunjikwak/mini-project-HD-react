@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RestBox from "./RestBox";
+import AxiosApi from "../../api/AxiosApi";
 
 const MyLikeStore = () => {
+
+    const [likeValue,setLikeValue] = useState('');
+	
+    useEffect(()=> {
+        const restlikeInfo = async() => {
+            const rsp = await AxiosApi.restLikeGet(localStorage.getItem("userId"));
+            if(rsp.status === 200) setLikeValue(rsp.data);
+            console.log(rsp.data);
+          };
+          restlikeInfo();
+
+    },[]);
 
 
     return(
         <>
-        <h4>찜한 가게</h4>
-        <RestBox/>
+        <div className="titleName">찜한 가게</div>
+        <RestBox value = {likeValue}/>
+      
         </>
     );
 };
