@@ -28,7 +28,7 @@ const ModalStyle = styled.div`
 
     section {
         width: 90%;
-        max-width: 450px;
+        max-width: ${props => props.maxWidth};
         margin: 0 auto;
         border-radius: 0.3rem;
         background-color: #fff;
@@ -39,7 +39,7 @@ const ModalStyle = styled.div`
     section > header {
         position: relative;
         padding: 16px 64px 16px 16px;
-        background-color: #f1f1f1;
+        background-color: #FFA07A;
         font-weight: 700;
     }
     section > header button {
@@ -97,10 +97,10 @@ const ModalStyle = styled.div`
 const Modal = (props) => {
     const { open, confirm, close, type, header, children } = props;
 
-    console.log("Modal Component : " + type);
-
+    //console.log("Modal Component : " + type);
+    const maxWidth = type ==="resv" ? 'none' : '450px';
     return (
-        <ModalStyle>
+        <ModalStyle maxWidth={maxWidth}>
             <div className={open ? 'openModal modal' : 'modal'}>
             {open &&
                 <section>
@@ -112,8 +112,7 @@ const Modal = (props) => {
                     </header>
                     <main>{children}</main>
                     <footer>
-                     
-                        <button onClick={close}>취소</button>
+                    {type === "ok" ?(<button onClick={close}>확인</button>):null}
                     </footer>
                 </section>
             }

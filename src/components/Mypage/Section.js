@@ -7,6 +7,7 @@ import styled from "styled-components";
 import MyResv from "./MyResv";
 import React from "react";
 import MypageMain from "./MypageMain";
+import MyInfo from "./MyInfo";
 const SectionBlock = styled.div`
     background-color:#FBF4EF;
     border-radius: 5px;
@@ -27,7 +28,7 @@ const SectionBlock = styled.div`
 const menuSelect = (name) => {
     switch(name){
         case "menu1" : 
-        return <MemberInfo/>;
+        return <MyInfo/>;
        
         case "menu2" : 
         return <MyReview/>;

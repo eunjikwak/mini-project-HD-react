@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ProfileImg from "../../images/ProfileImg.png"
 import AxiosApi from "../../api/AxiosApi";
 import { MemberContext } from "../../context/MemberContext";
-
+import Modal from "../../utils/Modal";
 const MyProfileBlock = styled.div`  
     width: 70%;
     height: auto;
@@ -24,7 +24,7 @@ const MyProfileBlock = styled.div`
         
     }
     //버튼
-    button{
+    .confirmBtn{
             margin: 20px;
             font-size: 26px;
             font-weight: bold;
@@ -87,6 +87,11 @@ const MyProfileBlock = styled.div`
 const MyProfile =  () => {
     const [showInput, setShowInput] = useState(false);
     const {memberValue,setMemberValue} = useContext(MemberContext);
+    //팝업 처리
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+            setModalOpen(false);
+        };
     useEffect(() => {    
         const memberInfo = async() => {
             const rsp = await AxiosApi.memberGet(localStorage.getItem("userId")); 
@@ -101,10 +106,13 @@ const MyProfile =  () => {
 
         const rsp = await AxiosApi.memberUpdate(memberValue);
         if(rsp.data){
-            console.log("회원정보 업데이트 완료!");//추후 업데이트
+            //console.log("회원정보 업데이트 완료!");//추후 업데이트
             setMemberValue(memberValue);
+            setModalOpen(true);
             //input창 닫기 
             setShowInput(false);
+            
+
         } 
     }
     
@@ -147,8 +155,9 @@ const MyProfile =  () => {
             </div>
             </div> 
         </div>
-        {showInput? <button onClick={onClickUpate} style={{backgroundColor : "#FFA07A"}}>수정완료</button> :
-                    <button onClick={()=> setShowInput(true)}>프로필수정</button>}
+        {showInput? <button className="confirmBtn" onClick={onClickUpate} style={{backgroundColor : "#FFA07A"}}>수정완료</button> :
+                    <button className="confirmBtn" onClick={()=> setShowInput(true)}>프로필수정</button>}
+        <Modal open={modalOpen} close={closeModal} type ="ok" header="수정 완료">프로필 수정 완료 되었습니다. </Modal>
         </MyProfileBlock>
     );
 }

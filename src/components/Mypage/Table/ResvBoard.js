@@ -6,7 +6,8 @@ import TableColumn from "./CommonTableColumn";
 import styled from "styled-components";
 import AxiosApi from "../../../api/AxiosApi";
 import PageNation from "./PageNation";
-
+import Modal from "../../../utils/Modal";
+import ResvView from "../../Mypage/ResvView";
 const ResvBlock  = styled.div`
     .board-title {
             font-size: 1.8rem;
@@ -43,6 +44,13 @@ const ResvBoard = ({stat}) => {
     //리뷰내역 가져오기 
     const [resvValue, setResvValue] = useState([]);
     const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 번호
+    //팝업 처리
+    const [modalOpen, setModalOpen] = useState(false);
+    //클릭한 행 상태 
+    const [selectedResv, setSelectedResv] = useState(null);
+    const closeModal = () => {
+            setModalOpen(false);
+        };
     //보여질 페이지 개수
     const ITEMS_PAGE = 3;
     useEffect(() => {
@@ -61,14 +69,18 @@ const ResvBoard = ({stat}) => {
       const offset = currentPage * ITEMS_PAGE; // 현재 페이지에서 보여줄 아이템의 시작 인덱스
       const currentPageData = resvValue.slice(offset, offset + ITEMS_PAGE);
 
+    const resvClick = (resv) => {
+        setModalOpen(true);
+        setSelectedResv(resv);
+    }
     return(
         <>
         <ResvBlock>
         <div className="board-title">{stat}</div>
         <Table headersName={['날짜','매장명','인원수','시간','상태']}>
         {resvValue && currentPageData.map((e) => (
-            <TableRow key={e.resvId}>
-            <TableColumn>{e.applicationDate}</TableColumn>
+            <TableRow key={e.resvId} onClick = {() =>resvClick(e)}>
+            <TableColumn >{e.applicationDate}</TableColumn>
             <TableColumn>{e.restName}</TableColumn>
             <TableColumn>{e.resvPeople}</TableColumn>
             <TableColumn>{e.applicationDate}</TableColumn>
@@ -79,7 +91,7 @@ const ResvBoard = ({stat}) => {
         </Table>
         <PageNation pageCount={pageCount} onPageChange={handlePageClick}/>
         </ResvBlock>
-        
+        <Modal open={modalOpen} close={closeModal} header="예약 정보" type="resv">{selectedResv&& <ResvView data={selectedResv}/>}</Modal>
 
         </>
     );

@@ -126,7 +126,7 @@ const Input = styled.input`
 `;
 
 
-const Login = () => {
+const Login = ({children}) => {
     const navigate = useNavigate();
 
     // 키보드 입력
@@ -191,7 +191,7 @@ const Login = () => {
         <div className="item1">
           <img src={imgLogo} alt="Logo" />
         </div>
-
+        <div>{children}</div>
         <div className="item2">
             <Input placeholder="이름" value ={inputId} onChange={onChangeId}/>
         </div>
@@ -211,7 +211,6 @@ const Login = () => {
           <button className="enable-button" onClick={onClickLogin}>SING IN</button>  :
           <button className="disable-button" onClick={onClickLogin}>SING IN</button>}
         </div>
-        <button>아이디찾기</button>
         <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
    </Container>
     );

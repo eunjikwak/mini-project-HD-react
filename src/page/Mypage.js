@@ -39,6 +39,7 @@ const Mypage= () => {
            <Section category={category}/>
            </div>
      
+       
            <HomeFooter/>
         
         </MypageBlock>

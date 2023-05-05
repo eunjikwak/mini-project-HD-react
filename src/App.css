@@ -38,10 +38,8 @@
 }
 
 @font-face {
-  font-family: "NanumGothic";
-  src: url(./utils/font/NanumGothic.ttf);
-}
-@font-face {
-  font-family: "NanumGothicExtra";
-  src: url(./utils/font/NanumGothicExtraBold.ttf);
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/nanumgothic/v9/P5u5Fm8GK5J5r5wQ80mQ5Q.woff2) format('woff2');
 }

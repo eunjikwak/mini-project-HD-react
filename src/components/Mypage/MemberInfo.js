@@ -1,10 +1,10 @@
 
-import React, {useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import AxiosApi from '../../api/AxiosApi';
 import styled from 'styled-components';
 import {useNavigate } from "react-router-dom";
 import { MemberContext } from '../../context/MemberContext';
-
+import Modal from '../../utils/Modal';
 const MemberInfoBlock = styled.div`
 
         display: flex;
@@ -64,6 +64,11 @@ const MemberInfoBlock = styled.div`
 const MemberInfo = () => {
     //컨텍스 api를 사용
     const{memberValue,setMemberValue} = useContext(MemberContext);
+    //팝업 처리
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     const navigate = useNavigate();
     const onChange = (e) => {
         const{name,value} = e.target;
@@ -74,12 +79,11 @@ const MemberInfo = () => {
 
         const rsp = await AxiosApi.memberUpdate(memberValue);
         if(rsp.data){
-            console.log("회원정보 업데이트 완료!");
+            //console.log("회원정보 업데이트 완료!");
             setMemberValue(memberValue);
-          
+            setModalOpen(true);
         } 
     }
-    //useEffect(()=> console.log(memberValue),[]);
  
 
     if(!memberValue) return<div>로그인이 필요합니다.</div>;
@@ -123,6 +127,7 @@ const MemberInfo = () => {
                 <button type="submit" onClick={submit}>수정</button>
                 <button onClick={()=>navigate(0)} style={{backgroundColor : "#EEE4DC"}}> 취소 </button>
                 </div>
+                <Modal open={modalOpen} close={closeModal} type ="ok" header="수정 완료">회원 정보 수정이 완료 되었습니다.</Modal>
         </MemberInfoBlock>
    
 
