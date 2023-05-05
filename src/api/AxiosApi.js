@@ -38,9 +38,9 @@ const AxiosApi = {
     // 회원 탈퇴
     memberDel: async(id) => {
         const del = {
-            id: id
+            id : id
         };
-        return await axios.post(HD_DOMAIN + "/delete", del);
+        return await axios.post(HD_DOMAIN + "/del", del);
     },
 
     //회원 업데이트 

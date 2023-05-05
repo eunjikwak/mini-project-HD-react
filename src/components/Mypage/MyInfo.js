@@ -7,7 +7,7 @@ const MyInfo = () => {
 
     return(
         <>
-        {!isPwd ? (<Password setIsPwd={setIsPwd}>내정보를 수정하려면 비밀번호를 입력하세요.</Password>) :
+        {!isPwd ? (<Password setIsPwd={setIsPwd} type="pwd">내정보를 수정하려면 비밀번호를 입력하세요.</Password>) :
             (<MemberInfo/>)}
         </>
     );

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useContext} from "react";
+import React,{ useState, useContext} from "react";
 import Modal from "../../utils/Modal";
 import styled from "styled-components";
 import { MemberContext } from "../../context/MemberContext";
@@ -36,20 +35,20 @@ align-items: center;
     font-weight: 700;
     cursor: pointer;
   }
-  .disenable-button{
-    margin : 0 auto;
-    font-size: 26px;
-    font-weight: bold;
-    width: 150px; /* 원하는 너비 설정 */
-    height: 50px;
-    color: white;
-    //background-color: #FF7F50;
-    font-size: 15px;
-    font-weight: 400;
-    border-radius: 18px;
-    border: orange;
-    font-weight: 700;
-  }
+  // .disenable-button{
+  //   margin : 0 auto;
+  //   font-size: 26px;
+  //   font-weight: bold;
+  //   width: 150px; /* 원하는 너비 설정 */
+  //   height: 50px;
+  //   color: white;
+  //   //background-color: #FF7F50;
+  //   font-size: 15px;
+  //   font-weight: 400;
+  //   border-radius: 18px;
+  //   border: orange;
+  //   font-weight: 700;
+  // }
   & > * {
     margin: 10px;
   }
@@ -68,7 +67,7 @@ const Input = styled.input`
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 `;
-const Password = ({children , type , setIsPwd}) => { 
+const Password = ({children , type , setIsPwd,memberDelete}) => { 
     //키보드입력
     const [inputPw, setInputPw] = useState("");
     const [inputConPw, setInputConPw] = useState("");
@@ -97,21 +96,21 @@ const Password = ({children , type , setIsPwd}) => {
     }
    
     const isPwd = () => {
-        //로그인 되어있는 아이디의 비번과 일치하는지 체크 
-      if(memberValue.pwd === inputPw) setIsPwd(true);
+        //로그인 되어있는 아이디의 비번과 일치하는지 체크
+      if(type==="pwd" && memberValue.pwd === inputPw) setIsPwd(true);
+      else if (type ==="del" && pwMessage && memberValue.pwd === inputPw) memberDelete();
       else setModalOpen(true);
     }
+
+
     return(
         <Container>
             <div className="pwdTitle">비밀번호 입력</div>
             <div className="content">{children}</div>
             <Input type="password" placeholder="패스워드" value={inputPw} onChange={onChangePw}/>
-            {type ==="del" &&  <Input type="password" placeholder="패스워드 재입력"  value ={inputConPw} onChange={onChangeConPw} />}
-
-            {pwMessage ? <button className="enable-button" onClick={isPwd}>확인</button> : <button className="disenable-button"disabled>확인</button>} 
-            <Modal open={modalOpen} close={closeModal} header="오류" type="ok">패스워드를 잘못 입력 하셨습니다.</Modal>
-       
-          
+            {type ==="del" &&<Input type="password" placeholder="패스워드 재입력"  value ={inputConPw} onChange={onChangeConPw} />}
+            <button className="enable-button" onClick={isPwd}>확인</button> 
+            <Modal open={modalOpen} close={closeModal} header="오류" type="ok">{type ==="del" && inputConPw===""? "패스워드를 한번 더 입력 해주세요" :"패스워드를 잘못 입력 하셨습니다."}</Modal>   
         </Container>
     );
 }

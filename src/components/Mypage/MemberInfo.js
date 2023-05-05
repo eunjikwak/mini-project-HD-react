@@ -5,23 +5,26 @@ import styled from 'styled-components';
 import {useNavigate } from "react-router-dom";
 import { MemberContext } from '../../context/MemberContext';
 import Modal from '../../utils/Modal';
+import Password from './Password';
 const MemberInfoBlock = styled.div`
 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
       
     .box{
         display: flex;
         flex-direction: row;
         align-items: center;
+        
             label{
                 width: 150px;
                 text-align: center;
                 }
         margin: 1em;
-            button{
+            .btn{
                 width: 100px;
                 height: 50px;
                 margin: 0  20px;
@@ -42,6 +45,19 @@ const MemberInfoBlock = styled.div`
                     background-color: #FFA07A;
                 }
             }
+            .delBtn{
+                font-family: inherit;
+                background-color: #FBF4EF;
+                font-size: 18px;
+                border: none;
+                position: absolute;
+                right: 0;
+                bottom:0;
+                cursor: pointer;
+                &:hover{
+                    font-weight: bolder;
+                }
+             }
            
    
         }
@@ -57,6 +73,7 @@ const MemberInfoBlock = styled.div`
         border-radius: 18px;
         
     }
+   
   
 
 `;
@@ -69,12 +86,29 @@ const MemberInfo = () => {
     const closeModal = () => {
         setModalOpen(false);
     };
+    //탈퇴팝업처리 
+    const [delOpen, setDelOpen] = useState(false);
+    const closeDelModal = () => {
+        setDelOpen(false);
+    };
+    
+    //탈퇴 완료 팝업
+    const [delCompleted, setDelCompleted] = useState(false);
+    const closeCompletedModal = () => {
+        setDelCompleted(false);
+        localStorage.removeItem("userId");
+        navigate('/');
+    };
+    //navigate사용
     const navigate = useNavigate();
+
+    //input 값 변경시 상태 변경
     const onChange = (e) => {
         const{name,value} = e.target;
         setMemberValue(state => ({...state,[name]:value}));
     };
 
+    //수정버튼 클릭 시
     const submit = async()=> {
 
         const rsp = await AxiosApi.memberUpdate(memberValue);
@@ -84,8 +118,20 @@ const MemberInfo = () => {
             setModalOpen(true);
         } 
     }
- 
+    
 
+    //회원 탈퇴 클릭
+    const memberDelete = async() => {
+        console.log("들어옴?");
+            const rsp = await AxiosApi.memberDel(memberValue.memId);
+            if (rsp.data) {
+              console.log(rsp.data);
+              setDelCompleted(true);
+            }
+           
+    }
+
+ 
     if(!memberValue) return<div>로그인이 필요합니다.</div>;
 	return (
  
@@ -124,10 +170,15 @@ const MemberInfo = () => {
                   <input id='email' name='email' value={memberValue.email} onChange={onChange}/>
                   </div>
                 <div className="box">
-                <button type="submit" onClick={submit}>수정</button>
-                <button onClick={()=>navigate(0)} style={{backgroundColor : "#EEE4DC"}}> 취소 </button>
+                <button className='btn' type="submit" onClick={submit}>수정</button>
+                <button className='btn' onClick={()=>navigate(0)} style={{backgroundColor : "#EEE4DC"}}> 취소 </button>
+                <button className='delBtn'>회원탈퇴</button>
                 </div>
-                <Modal open={modalOpen} close={closeModal} type ="ok" header="수정 완료">회원 정보 수정이 완료 되었습니다.</Modal>
+                
+                {/* <Modal open={modalOpen} close={closeModal} type ="ok" header="수정 완료">회원 정보 수정이 완료 되었습니다.</Modal> */}
+                <Modal open={delCompleted} close={closeCompletedModal} type ="ok" header="탈퇴 완료">탈퇴가 완료 되었습니다.</Modal>
+                <Modal open={delOpen} close={closeDelModal}  header="회원탈퇴"><Password type="del" memberDelete={memberDelete}>탈퇴하시려면 비밀번호 입력이 필요합니다.</Password></Modal>
+                
         </MemberInfoBlock>
    
 
