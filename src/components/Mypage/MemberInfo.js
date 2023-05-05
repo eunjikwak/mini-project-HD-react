@@ -79,7 +79,7 @@ const MemberInfo = () => {
           
         } 
     }
-    useEffect(()=> console.log(memberValue),[]);
+    //useEffect(()=> console.log(memberValue),[]);
  
 
     if(!memberValue) return<div>로그인이 필요합니다.</div>;
