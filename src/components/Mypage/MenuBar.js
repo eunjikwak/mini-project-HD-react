@@ -99,6 +99,15 @@ const MenuBar = ({onSelect,category}) => {
         setUserId(null);
         navigate('/');  
       };
+
+      const handleLinkClick = (path,category) => {
+        const queryParams = new URLSearchParams();
+        if(category) queryParams.set("category", category);
+        navigate({ pathname: path, search: queryParams.toString() }); 
+        onSelect(category);
+      };
+
+
     return(
         <MenuBlock>
             <Category key="nomal" onClick={()=>navigate(0)}>
@@ -107,7 +116,7 @@ const MenuBar = ({onSelect,category}) => {
             <hr />
           
         {categories.map(c=>(
-            <Category key={c.name} active={category===c.name} onClick={()=>onSelect(c.name)}>
+            <Category key={c.name} active={category===c.name} onClick={()=>handleLinkClick("/Mypage",c.name)}>
             {c.text}                
             </Category>
         ))}

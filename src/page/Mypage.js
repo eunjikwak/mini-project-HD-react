@@ -5,6 +5,11 @@ import MenuBar from "../components/Mypage/MenuBar";
 import MyProfile from "../components/Mypage/MyProfile";
 import Section from "../components/Mypage/Section";
 import styled from "styled-components";
+import Modal from "../utils/Modal";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import Header from "../components/header/Header";
+import { useLocation } from "react-router-dom";
 const MypageBlock = styled.div`
     //전체폰트
     font-family: "NanumGothic";
@@ -27,21 +32,46 @@ const MypageBlock = styled.div`
     
 `;
 const Mypage= () => {
-      const [category,setCategory] = useState('nomal');
+      const location =useLocation();
+      const queryParams = new URLSearchParams(location.search);
+      const headerSelect = queryParams.get("category");
+     
+      const [category,setCategory] = useState(headerSelect || 'nomal');
       const onSelect = useCallback(category => setCategory(category),[]);
+      const [modalOpen, setModalOpen] = useState(false);
+      const navigate = useNavigate();
+
+
+  
+    useEffect(()=> {
+        const useId= localStorage.getItem("userId");
+        if(!useId) {
+            setModalOpen(true);
+        }
+    },[]);
+
+    useEffect(() => {
+        // 선택된 카테고리 정보 변경 시 동작 수행
+        // 예: 해당 카테고리에 따른 데이터 로드
+       setCategory(headerSelect || 'nomarl');
+      }, [headerSelect]);
+
+      const closeModal=() => {
+        setModalOpen(false);
+        navigate('/Login');
+      }
 	return (
 		<MypageBlock>
-           <HomeHeader/>
+           {/* <HomeHeader setCategory={setCategory}/> */}
+           <Header setCategory={setCategory}> MY PAGE </Header>
            <div className="pageTitle"> MY PAGE </div>
            <MyProfile/>
            <div className="section">
            <MenuBar category={category} onSelect={onSelect}/>
            <Section category={category}/>
            </div>
-     
-       
            <HomeFooter/>
-        
+           <Modal open={modalOpen} close={closeModal} type="ok" header="로그인">로그인이 필요한 페이지입니다.</Modal>
         </MypageBlock>
     );
 }

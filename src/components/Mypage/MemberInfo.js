@@ -82,23 +82,20 @@ const MemberInfo = () => {
     //컨텍스 api를 사용
     const{memberValue,setMemberValue} = useContext(MemberContext);
     //팝업 처리
-    const [modalOpen, setModalOpen] = useState(false);
+    const [modalType, setModalType] = useState(null);
+
+    const openModal = (type) => {
+        setModalType(type);
+    }
     const closeModal = () => {
-        setModalOpen(false);
+        setModalType(null);
     };
-    //탈퇴팝업처리 
-    const [delOpen, setDelOpen] = useState(false);
-    const closeDelModal = () => {
-        setDelOpen(false);
-    };
-    
-    //탈퇴 완료 팝업
-    const [delCompleted, setDelCompleted] = useState(false);
     const closeCompletedModal = () => {
-        setDelCompleted(false);
+        setModalType(null);
         localStorage.removeItem("userId");
-        navigate('/');
-    };
+         navigate('/');
+    }
+    
     //navigate사용
     const navigate = useNavigate();
 
@@ -115,18 +112,20 @@ const MemberInfo = () => {
         if(rsp.data){
             //console.log("회원정보 업데이트 완료!");
             setMemberValue(memberValue);
-            setModalOpen(true);
+            openModal('ok');
         } 
     }
     
 
     //회원 탈퇴 클릭
     const memberDelete = async() => {
-        console.log("들어옴?");
+
             const rsp = await AxiosApi.memberDel(memberValue.memId);
             if (rsp.data) {
+              closeModal();
               console.log(rsp.data);
-              setDelCompleted(true);
+              openModal('delCompleted');
+           
             }
            
     }
@@ -172,12 +171,12 @@ const MemberInfo = () => {
                 <div className="box">
                 <button className='btn' type="submit" onClick={submit}>수정</button>
                 <button className='btn' onClick={()=>navigate(0)} style={{backgroundColor : "#EEE4DC"}}> 취소 </button>
-                <button className='delBtn'>회원탈퇴</button>
+                <button className='delBtn' onClick={() => openModal('del')}>회원탈퇴</button>
                 </div>
                 
-                {/* <Modal open={modalOpen} close={closeModal} type ="ok" header="수정 완료">회원 정보 수정이 완료 되었습니다.</Modal> */}
-                <Modal open={delCompleted} close={closeCompletedModal} type ="ok" header="탈퇴 완료">탈퇴가 완료 되었습니다.</Modal>
-                <Modal open={delOpen} close={closeDelModal}  header="회원탈퇴"><Password type="del" memberDelete={memberDelete}>탈퇴하시려면 비밀번호 입력이 필요합니다.</Password></Modal>
+                <Modal open={modalType === 'ok'} close={closeModal} type ="ok" header="수정 완료">회원 정보 수정이 완료 되었습니다.</Modal>
+                <Modal open={modalType === 'delCompleted'} close={closeCompletedModal} type ="ok" header="탈퇴 완료">탈퇴가 완료 되었습니다.</Modal>
+                <Modal open={modalType === 'del'} close={closeModal}  header="회원탈퇴"><Password type="del" memberDelete={memberDelete}>탈퇴하시려면 비밀번호 입력이 필요합니다.</Password></Modal>
                 
         </MemberInfoBlock>
    

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled, {css} from "styled-components";
 import MenuImg from "../../images/pngwing.com-removebg-preview.png";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate  } from "react-router-dom";
 const MenuButton = styled.div`
   height  : 100px;
   width : 100px;
@@ -78,9 +78,10 @@ const Box = styled.div`
    
 `;
 
-const SideMenu = () => {
+const SideMenu =({setCategory}) => {
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {   
         const clickOutside = (event) =>{
@@ -109,7 +110,12 @@ const SideMenu = () => {
         event.stopPropagation();
     };
 
-    
+    const handleLinkClick = (path,category) => {
+        const queryParams = new URLSearchParams();
+        if(category) queryParams.set("category", category);
+        navigate({ pathname: path, search: queryParams.toString() }); 
+        setIsOpen(false);
+      };
 
     return(
         
@@ -117,12 +123,12 @@ const SideMenu = () => {
                 <Box isOpen={isOpen} >
                    <div className="header">메뉴</div>
                     <div className="box" onClick={onClickBox}>
-                        <div className="item"><Link to="/Login">로그인</Link></div>
-                        <div className="item"><Link to="/Home/Mypage">마이페이지</Link></div>
-                        <div className="item">내 정보/수정</div>
-                        <div className="item">찜한 가게</div>
-                        <div className="item">1:1 문의 내역</div>
-                        <div className="item">예약 현황</div>
+                        <div className="item" onClick={()=> handleLinkClick("/Login")}>로그인</div>
+                        <div className="item" onClick={()=> handleLinkClick("/MyPage")}>마이페이지</div>
+                        <div className="item" onClick={()=> handleLinkClick("/MyPage","menu1")}>내 정보/수정</div>
+                        <div className="item" onClick={()=> handleLinkClick("/MyPage","menu3")}>찜한 가게</div>
+                        <div className="item" onClick={()=> handleLinkClick("/MyPage","menu4")}>1:1 문의 내역</div>
+                        <div className="item" onClick={()=> handleLinkClick("/MyPage","menu5")}>예약 현황</div>
                     </div>
                 </Box>
             </MenuButton>

@@ -5,6 +5,7 @@ import LogoCoral from "../../images/logo-removebg-preview.png";
 import BackgroundImg from "../../images/korean-food-fried-rice-with-kimchi-serve-with-fried-egg.jpg";
 import SearchBar from "../search/SearchBar";
 import HeaderTextImg from "../../images/text1.png"
+import { useState } from "react";
 
 
 const Container = styled.div`
@@ -84,7 +85,7 @@ const Logo = styled.img`
 
 
 
-const HomeHeader = () => {
+const HomeHeader = ({setCategory}) => {
     return(
         <>
             <Container>
@@ -96,7 +97,7 @@ const HomeHeader = () => {
 
                     <div className="background"></div>
                 </Box>
-                <SideMenu/>
+                <SideMenu setCategory={setCategory}/>
                 <SearchBar/>
             </Container>
         </>

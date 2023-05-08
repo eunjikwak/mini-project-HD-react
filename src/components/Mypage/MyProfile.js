@@ -123,7 +123,7 @@ const MyProfile =  () => {
         setMemberValue(state => ({...state,[name]:value}));
     }
     if(!memberValue) return<MyProfileBlock>로그인이 필요합니다.</MyProfileBlock>;//추후 업데이트
-    return(
+    return( 
         <MyProfileBlock>
         <div className="profileImg"><img src={ProfileImg} alt="Logo" /></div>
         <div className="profileInfo">

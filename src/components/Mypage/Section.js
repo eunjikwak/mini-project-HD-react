@@ -1,5 +1,4 @@
 
-import MemberInfo from "./MemberInfo";
 import MyReview from "./MyReview";
 import MyLikeStore from "./MyLikeStore";
 import MyInquiry from "./MyInquiry";
