@@ -83,7 +83,7 @@ const MyProfileBlock = styled.div`
 
 
 `;
-
+//나의 프로필
 const MyProfile =  () => {
     const [showInput, setShowInput] = useState(false);
     const {memberValue,setMemberValue} = useContext(MemberContext);
@@ -106,13 +106,10 @@ const MyProfile =  () => {
 
         const rsp = await AxiosApi.memberUpdate(memberValue);
         if(rsp.data){
-            //console.log("회원정보 업데이트 완료!");//추후 업데이트
             setMemberValue(memberValue);
             setModalOpen(true);
             //input창 닫기 
             setShowInput(false);
-            
-
         } 
     }
     

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RestBox from "./RestBox";
 import AxiosApi from "../../api/AxiosApi";
 
+//찜한가게
 const MyLikeStore = () => {
 
     const [likeValue,setLikeValue] = useState('');

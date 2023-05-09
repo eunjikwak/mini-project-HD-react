@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {useNavigate } from "react-router-dom";
 import { MemberContext } from '../../context/MemberContext';
 import Modal from '../../utils/Modal';
-import Password from './Password';
+import Password from '../../utils/Password';
 const MemberInfoBlock = styled.div`
 
         display: flex;
@@ -77,7 +77,7 @@ const MemberInfoBlock = styled.div`
   
 
 `;
-
+//내정보 수정
 const MemberInfo = () => {
     //컨텍스 api를 사용
     const{memberValue,setMemberValue} = useContext(MemberContext);

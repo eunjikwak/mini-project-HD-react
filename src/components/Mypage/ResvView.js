@@ -1,6 +1,8 @@
 import React, {useContext}from "react";
 import styled from "styled-components";
 import { MemberContext } from "../../context/MemberContext";
+
+//리뷰 상세정보
 const ResvModal = styled.div`
     font-family:"Nanum Gadic";
     background-color: #FBF4EF;

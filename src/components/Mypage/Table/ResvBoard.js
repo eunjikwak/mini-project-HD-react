@@ -1,11 +1,11 @@
 
 import React, { useEffect, useState } from "react";
-import Table from "./CommonTable";
-import TableRow from "./CommonTableRow";
-import TableColumn from "./CommonTableColumn";
+import Table from "../../../utils/table/CommonTable";
+import TableColumn from "../../../utils/table/CommonTableColumn";
+import TableRow from "../../../utils/table/CommonTableRow";
 import styled from "styled-components";
 import AxiosApi from "../../../api/AxiosApi";
-import PageNation from "./PageNation";
+import PageNation from "../../../utils/PageNation";
 import Modal from "../../../utils/Modal";
 import ResvView from "../../Mypage/ResvView";
 const ResvBlock  = styled.div`
@@ -40,6 +40,8 @@ const ResvBlock  = styled.div`
         }
     
 `;
+
+//리뷰게시판
 const ResvBoard = ({stat}) => {
     //리뷰내역 가져오기 
     const [resvValue, setResvValue] = useState([]);

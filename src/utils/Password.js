@@ -1,7 +1,7 @@
 import React,{ useState, useContext} from "react";
-import Modal from "../../utils/Modal";
+import Modal from "./Modal";
 import styled from "styled-components";
-import { MemberContext } from "../../context/MemberContext";
+import { MemberContext } from "../context/MemberContext";
 const Container = styled.div`
 text-align: center;
 border: 2px solid gray;
@@ -35,20 +35,6 @@ align-items: center;
     font-weight: 700;
     cursor: pointer;
   }
-  // .disenable-button{
-  //   margin : 0 auto;
-  //   font-size: 26px;
-  //   font-weight: bold;
-  //   width: 150px; /* 원하는 너비 설정 */
-  //   height: 50px;
-  //   color: white;
-  //   //background-color: #FF7F50;
-  //   font-size: 15px;
-  //   font-weight: 400;
-  //   border-radius: 18px;
-  //   border: orange;
-  //   font-weight: 700;
-  // }
   & > * {
     margin: 10px;
   }
@@ -58,14 +44,14 @@ align-items: center;
 const Input = styled.input`
   margin : 0 auto;
   margin-bottom: 20px;
-  width: 70%; /* 원하는 너비 설정 */
-  height: auto; /* 높이값 초기화 */
-  line-height : normal; /* line-height 초기화 */
-  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-  font-family: inherit; /* 폰트 상속 */
+  width: 70%; 
+  height: auto;
+  line-height : normal;
+  padding: .8em .5em; 
+  font-family: inherit; 
   border: 1px solid #999;
-  border-radius: 18px; /* iSO 둥근모서리 제거 */
-  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+  border-radius: 18px;
+  outline-style: none; 
 `;
 const Password = ({children , type , setIsPwd,memberDelete}) => { 
     //키보드입력

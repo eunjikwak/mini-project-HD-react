@@ -1,7 +1,7 @@
 import React from "react";
 import ResvBoard from "./Table/ResvBoard";
 
-
+//나의 예약현황
 const MyResv = () => {
   
     return(

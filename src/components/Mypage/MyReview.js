@@ -1,9 +1,9 @@
 import React,  { useEffect, useState } from "react";
-import Table from "./Table/CommonTable";
-import TableColumn from "./Table/CommonTableColumn";
-import TableRow from "./Table/CommonTableRow";
+import Table from "../../utils/table/CommonTable";
+import TableColumn from "../../utils/table/CommonTableColumn";
+import TableRow from "../../utils/table/CommonTableRow";
 import AxiosApi from "../../api/AxiosApi";
-import PageNation from "./Table/PageNation";
+import PageNation from "../../utils/PageNation";
 import styled from "styled-components";
 const TableBlock = styled.div`
 .common-table {

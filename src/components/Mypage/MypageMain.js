@@ -36,30 +36,23 @@ const Container = styled.div`
     }
 
 `;
+//마이페이지 첫 화면
 const MypageMain = () => {
     const [resvValue, setResvValue] = useState([]);
     const{memberValue} = useContext(MemberContext);
-    const data ={
-    userName : "홍길동",
-    date : "2023-05-15",
-    storeName : "두레순대국",
-    count : 2,
-    seat : 5,
-    stat : "예약대기"
-}
+  
 useEffect(() => {
     const resvInfo = async() => {
         const rsp = await AxiosApi.resvGet(localStorage.getItem("userId"),"예약확정");
         if(rsp.status === 200){
             setResvValue(rsp.data);
         } 
-        //console.log(rsp.data);
     };
    resvInfo();
     },[]);
 
     const filterData = resvValue.filter(item => new Date(item.applicationDate) >= new Date());
-    //console.log(filterData);
+
     return(
        
         <Container>

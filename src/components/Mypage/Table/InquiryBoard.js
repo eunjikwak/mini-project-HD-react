@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Table from "./CommonTable";
-import TableColumn from "./CommonTableColumn";
-import TableRow from "./CommonTableRow";
+import Table from "../../../utils/table/CommonTable";
+import TableColumn from "../../../utils/table/CommonTableColumn";
+import TableRow from "../../../utils/table/CommonTableRow";
 import styled from "styled-components";
 import AxiosApi from "../../../api/AxiosApi";
-import PageNation from "./PageNation";
+import PageNation from "../../../utils/PageNation";
 
 const TableBlock = styled.div`
         .common-table {
@@ -32,7 +32,7 @@ const TableBlock = styled.div`
         }
 `;
 
-
+// 문의게시판
 const InquiryBoard = props => {
 
   //문의내역 가져오기 

@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import HomeHeader from "../components/header/HomeHeader";
 import HomeFooter from "../components/footer/HomeFooter";
 import MenuBar from "../components/Mypage/MenuBar";
 import MyProfile from "../components/Mypage/MyProfile";
@@ -51,8 +50,6 @@ const Mypage= () => {
     },[]);
 
     useEffect(() => {
-        // 선택된 카테고리 정보 변경 시 동작 수행
-        // 예: 해당 카테고리에 따른 데이터 로드
        setCategory(headerSelect || 'nomarl');
       }, [headerSelect]);
 
@@ -62,7 +59,6 @@ const Mypage= () => {
       }
 	return (
 		<MypageBlock>
-           {/* <HomeHeader setCategory={setCategory}/> */}
            <Header setCategory={setCategory}> MY PAGE </Header>
            <div className="pageTitle"> MY PAGE </div>
            <MyProfile/>

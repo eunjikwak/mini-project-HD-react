@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Password from "./Password";
+import Password from "../../utils/Password";
 import MemberInfo from "./MemberInfo";
+
+//내정보 수정전 컴포넌트 
 const MyInfo = () => {
 
     const [isPwd,setIsPwd] = useState(false);

@@ -23,7 +23,7 @@ const RatingBox = styled.div`
 `;
 const RatingView = () => {
 
-    const AVG_RATING = 1.5;
+    const AVG_RATING = 3.3;
 
     return(
     

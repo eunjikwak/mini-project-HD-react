@@ -90,7 +90,7 @@ const Category = styled.div`
     }
     
 `;
-
+//마이페이지 카테고리
 const MenuBar = ({onSelect,category}) => {
     const [userId, setUserId] = useState(window.localStorage.getItem("userId"));
     const navigate = useNavigate();

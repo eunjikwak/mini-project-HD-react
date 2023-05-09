@@ -11,7 +11,7 @@ const SectionBlock = styled.div`
     border : 3px solid #F0B7A2;
     border-style :double;
     width : 70%;
-    height: 300px;
+    //height: 300px;
     margin-top :20px;
     .titleName {
         color : #FF7F50;
